@@ -6,6 +6,7 @@
 ---
 
 ## 🇬🇧 English
+A mod for converting values and items from JustMC to JMCC.
 
 ### 📖 How to Use
 
@@ -24,6 +25,7 @@ The mod will convert the **item your cursor is hovering over**.
 ---
 
 ## 🇷🇺 Русский
+Мод для конвертации значений и предметов JustMc в JMCC
 
 ### 📖 Как пользоваться
 
