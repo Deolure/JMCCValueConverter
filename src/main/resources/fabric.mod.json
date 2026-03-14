@@ -1,0 +1,46 @@
+{
+	"schemaVersion": 1,
+	"id": "jmcc-value-converter",
+	"version": "${version}",
+	"name": "JMCC Value Converter",
+	"description": "Мод для редактирования значений и предметов JustMc в JMCC!",
+	"authors": [
+		"DominosMersi"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/jmccvalueconverter",
+		"sources": "https://github.com/Deolure/JMCCValueConverter/"
+	},
+	"license": "MIT License",
+	"icon": "assets/jmcc-value-converter/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			{
+				"value": "dev.dominosmersi.JMCCValueConverter",
+				"adapter": "kotlin"
+			}
+		],
+		"client": [
+			{
+				"value": "dev.dominosmersi.JMCCValueConverterClient",
+				"adapter": "kotlin"
+			}
+		]
+	},
+	"mixins": [
+		"jmcc-value-converter.mixins.json",
+		{
+			"config": "jmcc-value-converter.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"accessWidener": "firewall.accesswidener",
+	"depends": {
+		"fabricloader": ">=0.18.4",
+		"minecraft": "~1.21.11",
+		"java": ">=21",
+		"fabric-api": "*",
+		"fabric-language-kotlin": "*"
+	}
+}
