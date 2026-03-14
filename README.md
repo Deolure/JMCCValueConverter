@@ -8,6 +8,10 @@
 ## 🇬🇧 English
 A mod for converting values and items from JustMC to JMCC.
 
+### ⚙️ Requirements
+- **Fabric API 0.141.3+1.21.11**
+- **Kotlin Fabric Mod Language 1.13.9+kotlin.2.3.10**
+
 ### 📖 How to Use
 
 1. Press the **conversion key** (default: `K`).
@@ -25,7 +29,11 @@ The mod will convert the **item your cursor is hovering over**.
 ---
 
 ## 🇷🇺 Русский
-Мод для конвертации значений и предметов JustMc в JMCC
+Мод для конвертации значений и предметов JustMC в JMCC.
+
+### ⚙️ Требования
+- **Fabric API 0.141.3+1.21.11**
+- **Kotlin Fabric Mod Language 1.13.9+kotlin.2.3.10**
 
 ### 📖 Как пользоваться
 
