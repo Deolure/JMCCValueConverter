@@ -10,7 +10,7 @@ A mod for converting values and items from JustMC to JMCC.
 
 ### ⚙️ Requirements
 - **Fabric API 0.141.3+1.21.11**
-- **Kotlin Fabric Mod Language 1.13.9+kotlin.2.3.10**
+- **Fabric Languane Kotlin 1.13.9+kotlin.2.3.10**
 
 ### 📖 How to Use
 
@@ -33,7 +33,7 @@ The mod will convert the **item your cursor is hovering over**.
 
 ### ⚙️ Требования
 - **Fabric API 0.141.3+1.21.11**
-- **Kotlin Fabric Mod Language 1.13.9+kotlin.2.3.10**
+- **Fabric Languane Kotlin 1.13.9+kotlin.2.3.10**
 
 ### 📖 Как пользоваться
 
