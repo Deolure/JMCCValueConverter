@@ -1,50 +1,31 @@
-## 🌍 Languages
+## English
+A client-side mod that converts item data and values from JustMC format to JMCC format.
 
-- 🇬🇧 English
-- 🇷🇺 Русский
+### Requirements
+- Fabric API 0.141.3+1.21.11  
+- Fabric Language Kotlin 1.13.9+kotlin.2.3.10  
 
----
+### Usage
+Press the conversion key (default: K).
 
-## 🇬🇧 English
-A mod for converting values and items from JustMC to JMCC.
+- If the inventory is closed, the item in your hand will be converted.  
+- If the inventory is open, the item under the cursor will be converted.  
 
-### ⚙️ Requirements
-- **Fabric API 0.141.3+1.21.11**
-- **Fabric Languane Kotlin 1.13.9+kotlin.2.3.10**
-
-### 📖 How to Use
-
-1. Press the **conversion key** (default: `K`).
-2. The mod will convert an item depending on your current situation.
-
-#### 🖐 Inventory Closed
-The mod will convert the **item currently in your hand**.
-
-#### 🎒 Inventory Open
-The mod will convert the **item your cursor is hovering over**.
-
-> 💡 **Tip**  
-> You can change the keybind in the **Controls** settings.
+You can change the keybind in the Controls settings.
 
 ---
 
-## 🇷🇺 Русский
-Мод для конвертации значений и предметов JustMC в JMCC.
+## Русский
+Клиентский мод для конвертации данных и значений предметов из формата JustMC в формат JMCC.
 
-### ⚙️ Требования
-- **Fabric API 0.141.3+1.21.11**
-- **Fabric Languane Kotlin 1.13.9+kotlin.2.3.10**
+### Требования
+- Fabric API 0.141.3+1.21.11  
+- Fabric Language Kotlin 1.13.9+kotlin.2.3.10  
 
-### 📖 Как пользоваться
+### Использование
+Нажмите клавишу конвертации (по умолчанию K).
 
-1. Нажмите **клавишу конвертации** (по умолчанию `K`).
-2. Мод конвертирует предмет в зависимости от ситуации.
+- При закрытом инвентаре конвертируется предмет в руке.  
+- При открытом инвентаре конвертируется предмет под курсором.  
 
-#### 🖐 Инвентарь закрыт
-Будет конвертирован **предмет, который находится у вас в руке**.
-
-#### 🎒 Инвентарь открыт
-Будет конвертирован **предмет, на который наведен курсор**.
-
-> 💡 **Подсказка**  
-> Вы можете изменить клавишу в настройках **Управления (Controls)**.
+Клавишу можно изменить в настройках управления.
