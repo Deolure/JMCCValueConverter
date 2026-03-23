@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "jmccvalueconverter",
+  "version": "${version}",
+  "name": "JMCCValueConverter",
+  "description": "Мод для конвертации значений JustMc в JMCC",
+  "authors": ["DominosMersi"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/jmccvalueconverter/icon.png",
+  "environment": "client",
+  "accessWidener": "jvc.accesswidener",
+  "entrypoints": {
+    "fabric-datagen": [
+      "dev.dominosmersi.jmccvalueconverter.client.JmccvalueconverterDataGenerator"
+    ],
+    "client": [
+      "dev.dominosmersi.JmccvalueconverterClient"
+    ],
+    "main": [
+      "dev.dominosmersi.jmccvalueconverter.Jmccvalueconverter"
+    ]
+  },
+  "mixins": [
+    "jmccvalueconverter.mixins.json",
+    {
+      "config": "jmccvalueconverter.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-language-kotlin": ">=${kotlin_loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
