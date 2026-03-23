@@ -2,7 +2,6 @@ package dev.dominosmersi
 
 import com.google.gson.JsonParser
 import com.mojang.serialization.DataResult
-import dev.dominosmersi.mixin.client.HandledScreenAccessor
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 import net.minecraft.client.MinecraftClient
@@ -101,6 +100,7 @@ object MyFeature {
                 "game_value" -> {getJmccValue(creativeTags)}
                 "array" -> {getJmccArray(creativeTags)}
                 "map" -> {getJmccMap(creativeTags)}
+                "variable" -> {getJmccVariable(creativeTags)}
                 else -> {
                     val customData = item.get(DataComponentTypes.CUSTOM_DATA)
                     if (customData != null) {
@@ -144,7 +144,7 @@ object MyFeature {
         val bukkit_values = item.components[DataComponentTypes.CUSTOM_DATA]?.copyNbt()?.getCompound("PublicBukkitValues")?.getOrNull()
         bukkit_values?.forEach { string, element ->
             if (string.startsWith("justcreativeplus:"))
-            custom_tags[string.replace("justcreativeplus:","")] = element
+                custom_tags[string.replace("justcreativeplus:","")] = element
         }
         val pretty_tags = anyToPrettyJson(custom_tags)
 
@@ -302,6 +302,22 @@ object MyFeature {
             else -> "\"$text\""
         }
     }
+    fun getJmccVariable(tags: NbtCompound): String {
+        val value = tags.getCompound("value")?.getOrNull()
+        val scope = value?.getString("scope")?.getOrNull()
+        val var_name = value?.getString("variable")?.getOrNull()
+
+        println(scope)
+
+        return when (scope) {
+            "game" -> "g`$var_name`"
+            "save" -> "s`$var_name`"
+            "local" -> "l`$var_name`"
+            "line" -> "ln`$var_name`"
+            else -> "g`$var_name`"
+        }
+    }
+
     fun escapeForJmccJson(text: String): String {
         return text.replace("\"", "\\\"")
     }
@@ -427,42 +443,43 @@ object MyFeature {
             return "value::$game_value<$textValue>"
         }
     }
-        fun getJmccArray(tags: NbtCompound): String {
-            val value = tags.getCompound("value")?.getOrNull()
-            val values = value?.getList("values")?.getOrNull()
-            val array_jmcc = mutableListOf<String>()
-            values?.forEach { value ->
-                val nbt = NbtCompound()
-                nbt.put("value", value)
+    fun getJmccArray(tags: NbtCompound): String {
+        val value = tags.getCompound("value")?.getOrNull()
+        val values = value?.getList("values")?.getOrNull()
+        val array_jmcc = mutableListOf<String>()
+        values?.forEach { value ->
+            val nbt = NbtCompound()
+            nbt.put("value", value)
 
-                val value_type = getCreativeType(nbt)
-                if (value != null) {
-                    array_jmcc.add(
-                        when (value_type) {
-                            "text" -> {getJmccText(nbt)}
-                            "number" -> {getJmccNumber(nbt)}
-                            "location" -> {getJmccLocation(nbt)}
-                            "vector" -> {getJmccVector(nbt)}
-                            "sound" -> {getJmccSound(nbt)}
-                            "particle" -> {getJmccParticle(nbt)}
-                            "potion" -> {getJmccPotion(nbt)}
-                            "game_value" -> {getJmccValue(nbt)}
-                            "array" -> {getJmccArray(nbt)}
-                            "map" -> {getJmccMap(nbt)}
-                            else -> {
-                                val valueCompound = value as NbtCompound
-                                val base64 = valueCompound.getString("item").getOrNull() as String
-                                val item = decodeItem(base64)
-                                val jmccItem = disassembleItem(item)
-                                jmccItem
-                            }
+            val value_type = getCreativeType(nbt)
+            if (value != null) {
+                array_jmcc.add(
+                    when (value_type) {
+                        "text" -> {getJmccText(nbt)}
+                        "number" -> {getJmccNumber(nbt)}
+                        "location" -> {getJmccLocation(nbt)}
+                        "vector" -> {getJmccVector(nbt)}
+                        "sound" -> {getJmccSound(nbt)}
+                        "particle" -> {getJmccParticle(nbt)}
+                        "potion" -> {getJmccPotion(nbt)}
+                        "game_value" -> {getJmccValue(nbt)}
+                        "array" -> {getJmccArray(nbt)}
+                        "map" -> {getJmccMap(nbt)}
+                        "variable" -> {getJmccVariable(nbt)}
+                        else -> {
+                            val valueCompound = value as NbtCompound
+                            val base64 = valueCompound.getString("item").getOrNull() as String
+                            val item = decodeItem(base64)
+                            val jmccItem = disassembleItem(item)
+                            jmccItem
                         }
-                    )
-                }
+                    }
+                )
             }
-
-            return prettyPrintJmcc(prettyPrint(array_jmcc))
         }
+
+        return prettyPrintJmcc(prettyPrint(array_jmcc))
+    }
     fun prettyPrint(value: Any?, indent: String = "      "): String {
         return when (value) {
             is List<*> -> {
@@ -518,6 +535,7 @@ object MyFeature {
                 "game_value" -> {getJmccValue(keyCompound)}
                 "array" -> {getJmccArray(keyCompound)}
                 "map" -> {getJmccMap(keyCompound)}
+                "variable" -> {getJmccVariable(keyCompound)}
                 else -> {
                     val valueCompound = value as NbtCompound
                     val base64 = valueCompound.getString("item").getOrNull() as String
@@ -541,6 +559,7 @@ object MyFeature {
                 "game_value" -> {getJmccValue(valueCompound)}
                 "array" -> {getJmccArray(valueCompound)}
                 "map" -> {getJmccMap(valueCompound)}
+                "variable" -> {getJmccVariable(valueCompound)}
                 else -> {
                     val valueCompound = value as NbtCompound
                     val base64 = valueCompound.getString("item").getOrNull() as String
@@ -548,7 +567,7 @@ object MyFeature {
                     val jmccItem = disassembleItem(item)
                     jmccItem
                 }
-                }
+            }
 
             jmcc_map[trueMapKey] = trueMapValue
         }
