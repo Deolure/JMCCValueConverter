@@ -32,6 +32,7 @@ import net.minecraft.text.Style
 import net.minecraft.text.Text
 import net.minecraft.text.TextColor
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 import org.apache.commons.codec.binary.Base64.decodeBase64
 import org.apache.logging.log4j.core.util.Integers
 import java.io.ByteArrayInputStream
@@ -54,24 +55,20 @@ object MyFeature {
                 if (slot != null && !slot.stack.isEmpty) {
                     client.keyboard.clipboard = disassembleItem(slot.stack)
                     client.player?.sendMessage(Text.of("Cкопировано в буфер обмена!"), false)
-                } else {
-                    client.keyboard.clipboard = "item(\"minecraft:air\")"
-                    client.player?.sendMessage(Text.of("Cкопировано в буфер обмена!"), false)
                 }
             }
         } else {
+            println()
             val player = client.player ?: return
             val item = player.mainHandStack
 
             if (!item.isEmpty && item.count > 0) {
                 client.keyboard.clipboard = disassembleItem(item)
-            } else {
-                client.keyboard.clipboard = "item(\"minecraft:air\")"
+                player.sendMessage(Text.of("Cкопировано в буфер обмена!"), false)
             }
-            player.sendMessage(Text.of("Cкопировано в буфер обмена!"), false)
         }
     }
-    fun run() {
+    /* fun run() {
         val client = MinecraftClient.getInstance()
         val player = client.player ?: return
         val item = player.mainHandStack
@@ -82,7 +79,7 @@ object MyFeature {
             client.keyboard.clipboard = "item(\"minecraft:air\")"
         }
         player.sendMessage(Text.of("Cкопировано в буфер обмена!"), false)
-    }
+    } */
 
     fun disassembleItem(item: ItemStack): String {
         // other values
